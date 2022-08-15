@@ -16,4 +16,8 @@
   <p class="col-4 fw-bold"><%=@result[:time]%></p>
 </div>
 
+<p>Total score: <%=SCORE.sum().round(2)%></p>
+<!--%ttscore += CACHE.read('total-score') %-->
+
 <button class="btn border-primary m-5"><%= link_to "New game", "new"%></button>
+<button class="btn border-primary m-5"><%= link_to "Reset score", "reset"%></button>

@@ -1,12 +1,20 @@
 require 'open-uri'
 require 'json'
 
+SCORE = []
+
+# CACHE = ActiveSupport::Cache::MemoryStore.new
+
+# cache.read('city')   # => nil
+# cache.write('city', "Duckburgh")
+
 class GamesController < ApplicationController
 
   def new
     @letters = []
     @start_time = Time.now()
-    10.times { @letters << ('A'..'Z').to_a.sample }
+    8.times { @letters << ('A'..'Z').to_a.sample }
+    2.times { @letters << %w[A E I O U Y].sample }
     @letters
   end
 
@@ -25,9 +33,18 @@ class GamesController < ApplicationController
     if word_ok(@grid, @word) == false
       @result = { time: "#{seconds} seconds", score: 0, message: 'not in the grid' }
     else
-      @result = { score: (api_answer['found'] == true ? api_answer['length'].fdiv(seconds) : 0),
+      @result = { score: (api_answer['found'] == true ? api_answer['length'].fdiv(seconds).round(2) : 0),
                 message: (api_answer['found'] == true ? 'Well done!' : 'Not an english word'),
                 time: "#{seconds} seconds" }
+    SCORE << @result[:score]
+    # CACHE.write('total-score', @result[:score])
     end
+  end
+
+  def reset
+    while SCORE.length > 1
+      SCORE.drop(0)
+    end
+    redirect_to "/new"
   end
 end

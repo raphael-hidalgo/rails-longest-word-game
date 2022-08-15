@@ -13,3 +13,5 @@
   <input type="text" value="<%=@letters%>" name="letters" style="display: none;">
   <input type="text" value="<%=@start_time%>" name="start" style="display: none;">
 </form>
+
+<p>Total score: <%=SCORE.sum().round(2)%></p>
