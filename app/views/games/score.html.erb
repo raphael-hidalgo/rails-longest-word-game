@@ -1,0 +1,19 @@
+<h1 class="my-3 mx-2">Score</h1>
+
+<div class="d-inline-flex mx-5">
+  <%@grid.each do |letter|%>
+    <span class="py-2 px-3 m-2 fs-1 shadow" style="background-color: rgba(17, 40, 232, 0.51); color: white; font-weight: bold; text-align: center;"><%=letter%></span>
+  <%end%>
+</div>
+
+<p class="py-3 my-3 fs-3">Word attempt: <strong><%=@word%></strong></p>
+<div class="row mx-5">
+  <p class="col-4">Message:</p>
+  <p class="col-4">Score:</p>
+  <p class="col-4">Time:</p>
+  <p class="col-4 fw-bold"><%=@result[:message]%></p>
+  <p class="col-4 fw-bold"><%=@result[:score]%></p>
+  <p class="col-4 fw-bold"><%=@result[:time]%></p>
+</div>
+
+<button class="btn border-primary m-5"><%= link_to "New game", "new"%></button>
