@@ -42,9 +42,9 @@ class GamesController < ApplicationController
   end
 
   def reset
-    while SCORE.length > 1
-      SCORE.drop(0)
+    while SCORE.count > 1
+      SCORE.drop()
     end
-    redirect_to "/new"
+    redirect_to '/new'
   end
 end
